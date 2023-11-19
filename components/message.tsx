@@ -1,5 +1,5 @@
-import { Headline } from '../components/headline'
-import { LinkVercel } from '../components/link-vercel'
+import { Headline } from "./headline";
+import { LinkVercel } from "./link-vercel";
 
 export function Message(props : { page: string }) {
   return (

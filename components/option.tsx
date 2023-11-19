@@ -7,12 +7,12 @@ const ITEMS = [
   {
     href: "https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app",
     title: "Learn",
-    description: "Learn about Next.js in an interactive course with&nbsp;quizzes!",
+    description: "Learn about Next.js in an interactive course with quizzes!",
   },
   {
     href: "https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app",
     title: "Templates",
-    description: "Discover and deploy boilerplate example Next.js&nbsp;projects.",
+    description: "Discover and deploy boilerplate example Next.js projects.",
   },
   {
     href: "https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app",
@@ -20,8 +20,6 @@ const ITEMS = [
     description: "Instantly deploy your Next.js site to a shareable URL with Vercel.",
   },
 ]
-
-// a > h2, p
 
 export function Option() {
   return (
