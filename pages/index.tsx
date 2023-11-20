@@ -3,16 +3,21 @@ import { Inter } from 'next/font/google'
 import { Option } from '../components/option'
 import { Message } from '../components/message'
 import { Header } from '@/components/Header'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  // const foo = 'bar'
-  // const handleClick = useCallback((e:any) => {
-  //   // e.preventDefault()
-  //   alert(foo)
-  // }, [])
+  const [count, setCount] = useState(555);
+
+  const handleClick = useCallback(
+    () => {
+      if (count < 560) {
+        setCount((count) => count + 1);
+      }
+    },
+    [count]
+  );
 
   useEffect(() => {
     // ここに書く処理はマウント時に実行される
@@ -23,13 +28,11 @@ export default function Home() {
     }
   }, [])
 
-  const [count, setCount] = useState(555);
-
   useEffect(() => {
     // countが変更されたときに実行される副作用
     console.log('Count changed:', count);
 
-    // クリーンアップ関数
+    //  cleanup functionと呼ばれる
     return () => {
       console.log('Component unmounted or count changed, cleanup here');
     };
@@ -42,7 +45,10 @@ export default function Home() {
       <Header />
       <div>
         <p>Count: {count}</p>
-        <button onClick={() => setCount(count => count + 1)}>プラス1ボタン</button>
+        {/* useStateで更新する */}
+        {/* <button onClick={() => setCount(count => count + 1)}>プラス1ボタン</button> */}
+        {/* useCallbackで更新する */}
+        <button onClick={handleClick}>プラス1ボタン</button>
       </div>
       <Message page="index" />
 
