@@ -3,45 +3,22 @@ import { Inter } from 'next/font/google'
 import { Option } from '../components/option'
 import { Message } from '../components/message'
 import { Header } from '@/components/Header'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect } from 'react'
+
+import { useCounter } from '@/hooks/useCounter'
+import { useAddElement } from '@/hooks/useAddElement'
+import { useBgChanger } from '@/hooks/useBgChanger'
 
 const inter = Inter({ subsets: ['latin'] })
 
+
+
 export default function Home() {
-  const [count, setCount] = useState(555);
-  const [isShow, setIsShow] = useState(true);
-  const [array, setArray] = useState([1]);
+  // 関数の返り値をHome内で定義する
+  const { count, isShow, handleClick, handleDisplay } = useCounter()
+  const { array, handleAdd } = useAddElement()
 
-  const handleClick = useCallback(
-    () => {
-      if (count < 560) {
-        setCount((count) => count + 1);
-      }
-    },
-    [count]
-  );
-
-  const handleDisplay = useCallback(
-    () => {
-      setIsShow((isShow) => !isShow);
-    },
-    []
-  );
-
-  const handleAdd = useCallback(() => {
-    setArray((array) => {
-      return [...array, array.length + 1];
-    });
-  }, [array]);
-
-  useEffect(() => {
-    // ここに書く処理はマウント時に実行される
-    document.body.style.backgroundColor = 'lightblue';
-    // return以降に書く処理はアンマウント時に実行される
-    return () => {
-      document.body.style.backgroundColor = '';
-    }
-  }, [])
+  useBgChanger()
 
   useEffect(() => {
     // countが変更されたときに実行される副作用
