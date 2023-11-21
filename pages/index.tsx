@@ -9,6 +9,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const [count, setCount] = useState(555);
+  const [isShow, setIsShow] = useState(true);
+  const [array, setArray] = useState([1]);
 
   const handleClick = useCallback(
     () => {
@@ -18,6 +20,19 @@ export default function Home() {
     },
     [count]
   );
+
+  const handleDisplay = useCallback(
+    () => {
+      setIsShow((isShow) => !isShow);
+    },
+    []
+  );
+
+  const handleAdd = useCallback(() => {
+    setArray((array) => {
+      return [...array, array.length + 1];
+    });
+  }, [array]);
 
   useEffect(() => {
     // ここに書く処理はマウント時に実行される
@@ -44,11 +59,20 @@ export default function Home() {
     >
       <Header />
       <div>
-        <p>Count: {count}</p>
+        {isShow ? <p>Count: {count}</p> : null}
         {/* useStateで更新する */}
         {/* <button onClick={() => setCount(count => count + 1)}>プラス1ボタン</button> */}
         {/* useCallbackで更新する */}
-        <button onClick={handleClick}>プラス1ボタン</button>
+        <button onClick={handleClick}>プラス1ボタン</button><br />
+
+        <button onClick={handleDisplay}>表示／非表示</button><br />
+
+        <button onClick={handleAdd}>追加</button>
+        <ul>
+          {array.map((item) => {
+            return <li key={item}>{item}</li>;
+          })}
+        </ul>
       </div>
       <Message page="index" />
 
