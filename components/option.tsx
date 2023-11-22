@@ -1,8 +1,8 @@
-export function Option({items}) {
+export function Option(props: any) {
 
   return (
     <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-      {items.map((item: any) => {
+      {props.items.map((item: any) => {
         return (
           <a
           key={item.title}

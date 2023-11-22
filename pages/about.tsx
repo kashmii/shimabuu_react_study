@@ -10,7 +10,7 @@ import { useCounter } from '@/hooks/useCounter'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function About() {
-  const { count, isShow, handleClick, handleDisplay } = useCounter()
+  const { isShow, doubleCount, handleClick, handleDisplay } = useCounter()
   const { array, handleAdd } = useAddElement()
 
   return (
@@ -19,7 +19,7 @@ export default function About() {
     >
       <Header />
       <div>
-        {isShow ? <p>Count: {count}</p> : null}
+        {isShow ? <p>Count: {doubleCount}</p> : null}
         <button onClick={handleClick}>プラス1ボタン</button><br />
 
         <button onClick={handleDisplay}>表示／非表示</button><br />
