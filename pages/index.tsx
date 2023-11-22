@@ -1,22 +1,28 @@
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import { Option } from '../components/option'
-import { Message } from '../components/message'
 import { Header } from '@/components/Header'
-import { useEffect } from 'react'
+import { Inter } from 'next/font/google'
+import { useEffect, useState, useCallback } from 'react'
+import { Message } from '../components/message'
+import { Option } from '../components/option'
+import { ITEMS } from '@/components/items'
 
-import { useCounter } from '@/hooks/useCounter'
 import { useAddElement } from '@/hooks/useAddElement'
 import { useBgChanger } from '@/hooks/useBgChanger'
+import { useCounter } from '@/hooks/useCounter'
 
 const inter = Inter({ subsets: ['latin'] })
-
-
 
 export default function Home() {
   // 関数の返り値をHome内で定義する
   const { count, isShow, handleClick, handleDisplay } = useCounter()
   const { array, handleAdd } = useAddElement()
+
+  const [items, setItems] = useState(ITEMS);
+  const handleReduce = useCallback(() => {
+    setItems((prevItems) => {
+      return prevItems.slice(0, prevItems.length - 1);
+    });
+  }, []);
 
   useBgChanger()
 
@@ -50,6 +56,8 @@ export default function Home() {
             return <li key={item}>{item}</li>;
           })}
         </ul>
+        <p>Item length is {items.length} !</p>
+        <button onClick={handleReduce}>減らす</button>
       </div>
       <Message page="index" />
 
@@ -64,7 +72,7 @@ export default function Home() {
         />
       </div>
 
-      <Option />
+      <Option items={items} />
     </main>
   )
 }
