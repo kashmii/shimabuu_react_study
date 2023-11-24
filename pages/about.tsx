@@ -6,12 +6,15 @@ import { ITEMS } from '@/components/items'
 
 import { useAddElement } from '@/hooks/useAddElement'
 import { useCounter } from '@/hooks/useCounter'
+import { useBgChanger } from '@/hooks/useBgChanger'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function About() {
   const { isShow, doubleCount, handleClick, handleDisplay } = useCounter()
   const { array, handleAdd } = useAddElement()
+
+  useBgChanger()
 
   return (
     <main
